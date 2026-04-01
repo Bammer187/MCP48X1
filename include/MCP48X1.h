@@ -10,8 +10,8 @@
 #include "driver/spi_master.h"
 
 typedef enum{
-	VREF_INTERNAL,
-	VREF_EXTERNAL,
+	GAIN_1X,
+	GAIN_2X,
 }mcp48x1_gain_t;
 
 typedef enum {
@@ -23,8 +23,17 @@ typedef enum {
 typedef struct {
 	spi_device_handle_t spi_handle;
 	mcp48x1_type_t model;
-	mcp48x1_gain_t vref;
+	mcp48x1_gain_t gain;
 }mcp48x1_t;
+
+esp_err_t mcp48x1_init(mcp48x1_t *mcp, 
+                       spi_host_device_t host, 
+                       int cs_pin, 
+                       mcp48x1_type_t model, 
+                       mcp48x1_gain_t gain,
+                       uint32_t spi_freq);
+
+void mcp_set_vref(mcp_48x1_t *mcp, mcp48x1_gain_t vref);
 
 esp_err_t mcp_set_voltage(mcp_48x1_t *mcp, uint16_t data);
 
