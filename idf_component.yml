@@ -1,4 +1,4 @@
 version: "1.0.0"
-description: "ESP-IDF compatible MCP48X1 Library"
+description: "Driver for MCP4801/4811/4821 SPI DACs"
 url: "https://github.com/Bammer187/MCP48X1"
 license: "MIT"
