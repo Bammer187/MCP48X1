@@ -8,13 +8,13 @@ A lightweight, efficient C driver for the **Microchip MCP4801 (8-bit), MCP4811 (
   - [License](#license)
 
 ## Features
-	- Supports all variants: MCP4801 (8-bit), MCP4811 (10-bit), and MCP4821 (12-bit).
+- Supports all variants: MCP4801 (8-bit), MCP4811 (10-bit), and MCP4821 (12-bit).
 
-	- Automatic Scaling: Handles bit-alignment (LSB padding) automatically based on the selected model.
+- Automatic Scaling: Handles bit-alignment (LSB padding) automatically based on the selected model.
 
-	- Dual Gain Support: Easy switching between 1x (2.048V) and 2x (4.096V) internal gain.
+- Dual Gain Support: Easy switching between 1x (2.048V) and 2x (4.096V) internal gain.
 
-	- Float API: Set voltages directly in Volts without manual bit calculation.
+- Float API: Set voltages directly in Volts without manual bit calculation.
 
 ## Installation
 
