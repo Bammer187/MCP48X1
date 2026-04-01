@@ -1,3 +1,2 @@
 dependencies:
-  mcp48x1:
-    path: "../../"
+  bammer187/mcp48x1: ">=1.0.0"
