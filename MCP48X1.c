@@ -33,10 +33,12 @@ esp_err_t mcp48x1_init(mcp48x1_t *mcp,
     return ret;
 }
 
+
 void mcp_set_gain(mcp_48x1_t *mcp, mcp48x1_gain_t gain)
 {
     mcp->gain = gain;
 }
+
 
 esp_err_t mcp_set_voltage(mcp_48x1_t *mcp, uint16_t data)
 {
@@ -65,4 +67,32 @@ esp_err_t mcp_set_voltage(mcp_48x1_t *mcp, uint16_t data)
     };
 
     return spi_device_transmit(mcp->spi_handle, &trans);
+}
+
+
+esp_err_t mcp_set_voltage_float(mcp48x1_t *mcp, float voltage)
+{
+    float v_ref = 2.048f;
+    float v_max;
+    uint16_t max_steps;
+
+    if (mcp->gain == GAIN_2X) {
+        v_max = v_ref * 2.0f;
+    } else {
+        v_max = v_ref;
+    }
+
+    switch (mcp->model) {
+        case MCP4821: max_steps = 4096; break;
+        case MCP4811: max_steps = 1024; break;
+        case MCP4801: max_steps = 256;  break;
+        default: return ESP_ERR_INVALID_ARG;
+    }
+
+    if (voltage < 0.0f) voltage = 0.0f;
+    if (voltage > v_max) voltage = v_max;
+
+    uint16_t data = (uint16_t)((voltage / v_max) * (max_steps - 1) + 0.5f);
+
+    return mcp_set_voltage(mcp, data);
 }

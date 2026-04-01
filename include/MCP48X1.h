@@ -33,8 +33,10 @@ esp_err_t mcp48x1_init(mcp48x1_t *mcp,
                        mcp48x1_gain_t gain,
                        uint32_t spi_freq);
 
-void mcp_set_vref(mcp_48x1_t *mcp, mcp48x1_gain_t vref);
+void mcp_set_gain(mcp_48x1_t *mcp, mcp48x1_gain_t gain);
 
 esp_err_t mcp_set_voltage(mcp_48x1_t *mcp, uint16_t data);
+
+esp_err_t mcp_set_voltage_float(mcp48x1_t *mcp, float voltage);
 
 #endif
