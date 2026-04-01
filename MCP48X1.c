@@ -6,12 +6,8 @@
 
 #include "MCP48X1.h"
 
-esp_err_t mcp48x1_init(mcp48x1_t *mcp, 
-                       spi_host_device_t host, 
-                       int cs_pin, 
-                       mcp48x1_type_t model, 
-                       mcp48x1_gain_t gain,
-                       uint32_t spi_freq)
+esp_err_t mcp48x1_init(mcp48x1_t *mcp, spi_host_device_t host, int cs_pin, 
+                       mcp48x1_type_t model, mcp48x1_gain_t gain, uint32_t spi_freq)
 {
     if (mcp == NULL) {
         return ESP_ERR_INVALID_ARG;
@@ -34,17 +30,17 @@ esp_err_t mcp48x1_init(mcp48x1_t *mcp,
 }
 
 
-void mcp_set_gain(mcp_48x1_t *mcp, mcp48x1_gain_t gain)
+void mcp_set_gain(mcp48x1_t *mcp, mcp48x1_gain_t gain)
 {
     mcp->gain = gain;
 }
 
 
-esp_err_t mcp_set_voltage(mcp_48x1_t *mcp, uint16_t data)
+esp_err_t mcp_set_voltage(mcp48x1_t *mcp, uint16_t data)
 {
 	uint16_t command = 0;
 
-	command |= (mcp->gain << 13) // GAIN
+	command |= (mcp->gain << 13); // GAIN
     command |= (1 << 12); // SHDN = 1
 
 	switch (mcp->model) {
